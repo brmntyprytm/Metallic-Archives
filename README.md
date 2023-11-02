@@ -1,16 +1,16 @@
-# metallicarchives
+# Metallic Archives
 
-A new Flutter project.
+Name : Bramantyo Priyo Utomo
 
-## Getting Started
+Class : International Class
 
-This project is a starting point for a Flutter application.
+NPM : 2206821563
 
-A few resources to get you started if this is your first Flutter project:
+# Essay
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<details>
+<summary><strong>Assignment 7: Flutter Basic Elements</strong></summary>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Flutter Basic Elements
+
+1.
