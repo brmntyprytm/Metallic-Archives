@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import
+import 'package:metallicarchives/widgets/left_drawer.dart';
+// ignore: unused_import
+import 'package:metallicarchives/widgets/shopcard.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
@@ -17,7 +21,9 @@ class MyHomePage extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
+      drawer: const LeftDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -46,69 +52,6 @@ class MyHomePage extends StatelessWidget {
                 }).toList(),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ShopItem {
-  final String name;
-  final IconData icon;
-
-  ShopItem(this.name, this.icon);
-}
-
-class ShopCard extends StatelessWidget {
-  final ShopItem item;
-
-  const ShopCard(this.item, {Key? key});
-
-  @override
-  Widget build(BuildContext context) {
-    Color buttonColor;
-    switch (item.name) {
-    case "View Album Catalogues":
-      buttonColor = Colors.green;
-      break;
-    case "Add Albums to Wishlist":
-      buttonColor = Colors.blue;
-      break;
-    case "Logout":
-      buttonColor = Colors.red;
-      break;
-    default:
-      buttonColor = Colors.indigo;
-    } 
-    return Material(
-      color: buttonColor,
-      child: InkWell(
-        onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-                content: Text("You pressed the ${item.name} button!")));
-        },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
           ),
         ),
       ),
