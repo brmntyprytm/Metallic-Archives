@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metallicarchives/screens/list_product.dart';
 import 'package:metallicarchives/screens/menu.dart';
 import 'package:metallicarchives/screens/shoplist_form.dart';
 
@@ -49,6 +50,17 @@ class LeftDrawer extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => MyHomePage(),
                 ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.shopping_basket),
+            title: const Text('Product List'),
+            onTap: () {
+              // Route menu to product page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProductPage()),
               );
             },
           ),

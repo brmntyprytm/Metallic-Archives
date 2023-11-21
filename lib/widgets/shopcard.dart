@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:metallicarchives/screens/list_product.dart';
+import 'package:metallicarchives/screens/login.dart';
 import 'package:metallicarchives/screens/shoplist_form.dart';
-import 'package:metallicarchives/screens/view_product.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class ShopItem {
   final String name;
@@ -17,6 +20,7 @@ class ShopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     Color buttonColor;
     switch (item.name) {
       case "View Album Catalogues":
@@ -35,7 +39,7 @@ class ShopCard extends StatelessWidget {
       color: buttonColor,
       child: InkWell(
         // Area responsive to touch
-        onTap: () {
+        onTap: () async {
           // Show SnackBar when clicked
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -50,14 +54,31 @@ class ShopCard extends StatelessWidget {
                 builder: (context) => const ShopFormPage(),
               ),
             );
-          }
-          if (item.name == "View Album Catalogues") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ViewAlbums(),
-              ),
-            );
+          } else if (item.name == "View Album Catalogues") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ProductPage()));
+          } else if (item.name == "Logout") {
+            final response =
+                await request.logout("http://127.0.0.1:8000/auth/logout/");
+            String message = response["message"];
+            if (response['status']) {
+              String uname = response["username"];
+              // ignore: use_build_context_synchronously
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("$message Good bye, $uname."),
+              ));
+              // ignore: use_build_context_synchronously
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            } else {
+              // ignore: use_build_context_synchronously
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                // ignore: unnecessary_string_interpolations
+                content: Text("$message"),
+              ));
+            }
           }
         },
         child: Container(
